@@ -1,7 +1,7 @@
 {
     "name": "ubxty/spatie-laravel-backup-utils",
     "description": "Enhanced utilities and notifications for spatie/laravel-backup with comprehensive logging, S3 configuration, and statistical analysis",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "type": "library",
     "license": "MIT",
     "keywords": [
