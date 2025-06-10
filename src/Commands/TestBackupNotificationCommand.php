@@ -18,7 +18,7 @@ use Spatie\Backup\Notifications\Notifications\BackupHasFailedNotification;
  * @author  Ravdeep Singh <info@ubxty.com>
  * @author  UBXTY Unboxing Technology <info@ubxty.com>
  * @license MIT
- * @version 1.0.1
+ * @version 1.0.2
  */
 class TestBackupNotificationCommand extends Command
 {

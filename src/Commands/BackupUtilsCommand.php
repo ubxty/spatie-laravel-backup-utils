@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Artisan;
  * @author  Ravdeep Singh <info@ubxty.com>
  * @author  UBXTY Unboxing Technology <info@ubxty.com>
  * @license MIT
- * @version 1.0.1
+ * @version 1.0.2
  */
 class BackupUtilsCommand extends Command
 {
@@ -386,7 +386,7 @@ class BackupUtilsCommand extends Command
         $this->info('╭─────────────────────────────────────────────────────────────╮');
         $this->info('│               🔧 UBXTY Backup Utils Dashboard              │');
         $this->info('│              Enhanced Laravel Backup Management            │');
-        $this->info('│            by Ravdeep Singh • UBXTY v1.0.1                 │');
+        $this->info('│            by Ravdeep Singh • UBXTY v1.0.2                 │');
         $this->info('╰─────────────────────────────────────────────────────────────╯');
         $this->line('');
     }
