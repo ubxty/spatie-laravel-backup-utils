@@ -475,6 +475,10 @@ class BackupUtilsCommand extends Command
                         '--tag' => 'backup-config'
                     ]);
                     $this->info('✅ Published spatie backup configuration');
+                    
+                    // Auto-configure the published backup config
+                    $this->configureBackupFile();
+                    
                 } catch (\Exception $e) {
                     $this->error('❌ Failed to publish spatie backup config: ' . $e->getMessage());
                     $this->comment('💡 Try running manually: php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --tag=backup-config');
@@ -482,6 +486,11 @@ class BackupUtilsCommand extends Command
             }
         } elseif ($spatieInstalled && $backupConfigExists) {
             $this->info('ℹ️  Spatie backup configuration already exists at config/backup.php');
+            
+            // Ask if they want to update the existing config
+            if ($this->confirm('Update backup configuration with S3 disk and enhanced notifications?', true)) {
+                $this->configureBackupFile();
+            }
         }
 
         $this->line('');
@@ -550,5 +559,77 @@ class BackupUtilsCommand extends Command
         $randomTip = $tips[array_rand($tips)];
         $this->comment($randomTip);
         $this->line('');
+    }
+
+    /**
+     * Configure the backup.php file with S3 disk and enhanced notifications.
+     */
+    private function configureBackupFile(): void
+    {
+        $backupConfigPath = config_path('backup.php');
+        
+        if (!file_exists($backupConfigPath)) {
+            $this->warn('⚠️  Backup configuration file not found at config/backup.php');
+            return;
+        }
+
+        try {
+            $this->comment('🔧 Configuring backup.php with S3 disk and enhanced notifications...');
+
+            $configContent = file_get_contents($backupConfigPath);
+
+            // Add s3_backup to disks array if not already present
+            if (strpos($configContent, "'s3_backup'") === false) {
+                $configContent = str_replace(
+                    "'disks' => [\n                'local',\n            ],",
+                    "'disks' => [\n                'local',\n                's3_backup',\n            ],",
+                    $configContent
+                );
+                
+                // Alternative format that might exist
+                $configContent = str_replace(
+                    "'disks' => ['local'],",
+                    "'disks' => ['local', 's3_backup'],",
+                    $configContent
+                );
+            }
+
+            // Update the notifiable class
+            $configContent = str_replace(
+                "'notifiable' => \Spatie\Backup\Notifications\Notifiable::class,",
+                "'notifiable' => \Ubxty\SpatieLaravelBackupUtils\Notifications\BackupNotifiable::class,",
+                $configContent
+            );
+
+            // Add backup_log channel to notification channels
+            $notificationChannels = [
+                "\\Spatie\\Backup\\Notifications\\Notifications\\BackupHasFailedNotification::class => ['mail', 'backup_log'],",
+                "\\Spatie\\Backup\\Notifications\\Notifications\\UnhealthyBackupWasFoundNotification::class => ['mail', 'backup_log'],",
+                "\\Spatie\\Backup\\Notifications\\Notifications\\CleanupHasFailedNotification::class => ['mail', 'backup_log'],",
+                "\\Spatie\\Backup\\Notifications\\Notifications\\BackupWasSuccessfulNotification::class => ['mail', 'backup_log'],",
+                "\\Spatie\\Backup\\Notifications\\Notifications\\HealthyBackupWasFoundNotification::class => ['mail', 'backup_log'],",
+                "\\Spatie\\Backup\\Notifications\\Notifications\\CleanupWasSuccessfulNotification::class => ['mail', 'backup_log'],"
+            ];
+
+            foreach ($notificationChannels as $channel) {
+                $originalChannel = str_replace(", 'backup_log'", "", $channel);
+                $configContent = str_replace($originalChannel, $channel, $configContent);
+            }
+
+            // Write the updated content back to the file
+            file_put_contents($backupConfigPath, $configContent);
+
+            $this->info('✅ Enhanced backup configuration:');
+            $this->line('   • Added s3_backup disk for S3 storage');
+            $this->line('   • Added backup_log channel to all notifications');
+            $this->line('   • Updated notifiable class for enhanced notifications');
+
+        } catch (\Exception $e) {
+            $this->error('❌ Failed to configure backup.php: ' . $e->getMessage());
+            $this->comment('💡 You can manually add the following to your config/backup.php:');
+            $this->line('   • Add "s3_backup" to the destination.disks array');
+            $this->line('   • Add "backup_log" to all notification channels');
+            $this->line('   • Set notifiable to \\Ubxty\\SpatieLaravelBackupUtils\\Notifications\\BackupNotifiable::class');
+        }
     }
 } 
