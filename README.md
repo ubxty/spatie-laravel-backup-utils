@@ -469,4 +469,4 @@ If you discover any security related issues, please email security@ubxty.com ins
 
 ---
 
-**Built with ❤️ by [Ravdeep Singh](https://github.com/ravdeepsingh) • [UBXTY Unboxing Technology](https://ubxty.com)**
+**Built with ❤️ by [Ravdeep Singh](https://www.linkedin.com/in/ravdeep-singh-a4544abb/) • [UBXTY Unboxing Technology](https://ubxty.com)**
