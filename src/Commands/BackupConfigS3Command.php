@@ -64,6 +64,7 @@ class BackupConfigS3Command extends Command
                 'test' => 'Test existing S3 connection',
                 'update' => 'Update S3 configuration',
                 'both' => 'Update configuration and then test',
+                'debug' => 'Show detailed configuration debugging',
                 'exit' => 'Exit without changes'
             ],
             'both'
@@ -83,6 +84,9 @@ class BackupConfigS3Command extends Command
             case 'both':
                 $this->updateS3Config();
                 return $this->testS3Connection();
+
+            case 'debug':
+                return $this->showConfigDebug();
                 
             case 'exit':
                 $this->info('👋 Exiting without changes.');
@@ -277,15 +281,47 @@ class BackupConfigS3Command extends Command
                 $this->info('Running backup test...');
                 $this->line('');
                 
-                $exitCode = Artisan::call('backup:run', [
-                    '--only-to-disk' => 's3_backup',
-                    '--disable-notifications' => true,
-                ]);
-                
-                if ($exitCode === 0) {
-                    $this->info('✅ Backup test completed successfully!');
-                } else {
-                    $this->error('❌ Backup test failed. Check the logs for details.');
+                try {
+                    // Clear any cached config first
+                    Artisan::call('config:clear');
+                    
+                    // Run the backup with verbose output
+                    $exitCode = Artisan::call('backup:run', [
+                        '--only-to-disk' => 's3_backup',
+                        '--disable-notifications' => true,
+                    ]);
+                    
+                    // Get the output from the backup command
+                    $output = Artisan::output();
+                    
+                    if ($exitCode === 0) {
+                        $this->info('✅ Backup test completed successfully!');
+                        $this->line('');
+                        $this->comment('Backup output:');
+                        $this->line($output);
+                    } else {
+                        $this->error('❌ Backup test failed. Exit code: ' . $exitCode);
+                        $this->line('');
+                        $this->comment('Backup output:');
+                        $this->line($output);
+                        
+                        // Additional debugging
+                        $this->line('');
+                        $this->warn('🔍 Debugging information:');
+                        $this->line('  • Check storage/logs/laravel.log for detailed error messages');
+                        $this->line('  • Verify S3 backup disk is properly configured in config/backup.php');
+                        $this->line('  • Ensure s3_backup disk exists in config/filesystems.php');
+                        
+                        return 1;
+                    }
+                } catch (\Exception $e) {
+                    $this->error('❌ Backup test failed with exception: ' . $e->getMessage());
+                    $this->line('');
+                    $this->warn('🔍 Debugging information:');
+                    $this->line('  • Exception: ' . get_class($e));
+                    $this->line('  • File: ' . $e->getFile() . ':' . $e->getLine());
+                    $this->line('  • Check storage/logs/laravel.log for detailed error messages');
+                    
                     return 1;
                 }
             }
@@ -388,5 +424,101 @@ class BackupConfigS3Command extends Command
         }
         
         return $value;
+    }
+
+    /**
+     * Show detailed configuration debugging information.
+     */
+    private function showConfigDebug(): int
+    {
+        $this->info('🔍 Configuration Debugging Information');
+        $this->line('');
+
+        // Check if s3_backup disk exists in filesystems config
+        $this->comment('📁 Checking filesystem configuration...');
+        $s3BackupDisk = config('filesystems.disks.s3_backup');
+        if ($s3BackupDisk) {
+            $this->info('✅ s3_backup disk found in config/filesystems.php');
+            $this->table(['Key', 'Value'], [
+                ['Driver', $s3BackupDisk['driver'] ?? 'not set'],
+                ['Key', isset($s3BackupDisk['key']) ? $this->maskSensitiveValue('AWS_ACCESS_KEY_ID_BACKUP', $s3BackupDisk['key']) : 'not set'],
+                ['Secret', isset($s3BackupDisk['secret']) ? '***masked***' : 'not set'],
+                ['Region', $s3BackupDisk['region'] ?? 'not set'],
+                ['Bucket', $s3BackupDisk['bucket'] ?? 'not set'],
+            ]);
+        } else {
+            $this->error('❌ s3_backup disk not found in config/filesystems.php');
+        }
+
+        $this->line('');
+
+        // Check backup configuration
+        $this->comment('📋 Checking backup configuration...');
+        $backupDisks = config('backup.backup.destination.disks', []);
+        if (in_array('s3_backup', $backupDisks)) {
+            $this->info('✅ s3_backup disk found in backup destination disks');
+        } else {
+            $this->error('❌ s3_backup disk not found in backup destination disks');
+            $this->comment('Current backup disks: ' . implode(', ', $backupDisks));
+        }
+
+        $this->line('');
+
+        // Check notification configuration
+        $this->comment('🔔 Checking notification configuration...');
+        $notifiable = config('backup.notifications.notifiable');
+        if ($notifiable === '\Ubxty\SpatieLaravelBackupUtils\Notifications\BackupNotifiable') {
+            $this->info('✅ Enhanced BackupNotifiable class is configured');
+        } else {
+            $this->warn('⚠️ Default notifiable class in use: ' . ($notifiable ?? 'not set'));
+        }
+
+        // Check if backup_log channel exists
+        $backupLogChannel = config('logging.channels.backup');
+        if ($backupLogChannel) {
+            $this->info('✅ backup logging channel is configured');
+        } else {
+            $this->warn('⚠️ backup logging channel not found');
+        }
+
+        $this->line('');
+
+        // Environment variables check
+        $this->comment('🔧 Environment variables check...');
+        $envErrors = [];
+        $requiredVars = ['AWS_ACCESS_KEY_ID_BACKUP', 'AWS_SECRET_ACCESS_KEY_BACKUP', 'AWS_DEFAULT_REGION_BACKUP', 'AWS_BUCKET_BACKUP'];
+        
+        foreach ($requiredVars as $var) {
+            $value = env($var);
+            if (!$value) {
+                $envErrors[] = $var;
+            }
+        }
+
+        if (empty($envErrors)) {
+            $this->info('✅ All required environment variables are set');
+        } else {
+            $this->error('❌ Missing required environment variables:');
+            foreach ($envErrors as $var) {
+                $this->line("   • {$var}");
+            }
+        }
+
+        $this->line('');
+
+        // Try to test S3 connection
+        if (empty($envErrors) && $s3BackupDisk) {
+            if ($this->confirm('🧪 Run S3 connection test?', true)) {
+                return $this->testS3Connection();
+            }
+        } else {
+            $this->warn('⚠️ Cannot test S3 connection due to configuration issues above');
+            if ($this->confirm('🔧 Would you like to update the configuration?', true)) {
+                $this->updateS3Config();
+                return $this->showConfigDebug();
+            }
+        }
+
+        return 0;
     }
 } 
