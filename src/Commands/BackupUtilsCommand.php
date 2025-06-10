@@ -465,10 +465,16 @@ class BackupUtilsCommand extends Command
 
         // Publish spatie backup config if needed
         if (!config('backup') && $this->confirm('Publish spatie backup configuration?', true)) {
-            Artisan::call('vendor:publish', [
-                '--provider' => 'Spatie\Backup\BackupServiceProvider'
-            ]);
-            $this->info('✅ Published spatie backup configuration');
+            try {
+                Artisan::call('vendor:publish', [
+                    '--provider' => 'Spatie\Backup\BackupServiceProvider',
+                    '--tag' => 'backup-config'
+                ]);
+                $this->info('✅ Published spatie backup configuration');
+            } catch (\Exception $e) {
+                $this->error('❌ Failed to publish spatie backup config: ' . $e->getMessage());
+                $this->comment('💡 Try running manually: php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --tag=backup-config');
+            }
         }
 
         $this->line('');
