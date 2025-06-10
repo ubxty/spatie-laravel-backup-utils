@@ -454,27 +454,34 @@ class BackupUtilsCommand extends Command
         }
 
         // Check if spatie/laravel-backup is installed
-        if (!class_exists('\Spatie\Backup\BackupServiceProvider')) {
+        $spatieInstalled = class_exists('\Spatie\Backup\BackupServiceProvider');
+        if (!$spatieInstalled) {
             $this->warn('⚠️ Spatie Laravel Backup not found!');
             if ($this->confirm('Install spatie/laravel-backup now?', true)) {
                 $this->comment('Installing spatie/laravel-backup...');
                 shell_exec('composer require spatie/laravel-backup');
                 $this->info('✅ Spatie Laravel Backup installed');
+                $spatieInstalled = true;
             }
         }
 
-        // Publish spatie backup config if needed
-        if (!config('backup') && $this->confirm('Publish spatie backup configuration?', true)) {
-            try {
-                Artisan::call('vendor:publish', [
-                    '--provider' => 'Spatie\Backup\BackupServiceProvider',
-                    '--tag' => 'backup-config'
-                ]);
-                $this->info('✅ Published spatie backup configuration');
-            } catch (\Exception $e) {
-                $this->error('❌ Failed to publish spatie backup config: ' . $e->getMessage());
-                $this->comment('💡 Try running manually: php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --tag=backup-config');
+        // Publish spatie backup config if needed (check if backup.php file exists)
+        $backupConfigExists = file_exists(config_path('backup.php'));
+        if ($spatieInstalled && !$backupConfigExists) {
+            if ($this->confirm('Publish spatie backup configuration?', true)) {
+                try {
+                    Artisan::call('vendor:publish', [
+                        '--provider' => 'Spatie\Backup\BackupServiceProvider',
+                        '--tag' => 'backup-config'
+                    ]);
+                    $this->info('✅ Published spatie backup configuration');
+                } catch (\Exception $e) {
+                    $this->error('❌ Failed to publish spatie backup config: ' . $e->getMessage());
+                    $this->comment('💡 Try running manually: php artisan vendor:publish --provider="Spatie\Backup\BackupServiceProvider" --tag=backup-config');
+                }
             }
+        } elseif ($spatieInstalled && $backupConfigExists) {
+            $this->info('ℹ️  Spatie backup configuration already exists at config/backup.php');
         }
 
         $this->line('');
