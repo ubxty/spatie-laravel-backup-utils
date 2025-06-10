@@ -1,0 +1,64 @@
+{
+    "name": "ubxty/spatie-laravel-backup-utils",
+    "description": "Enhanced utilities and notifications for spatie/laravel-backup with comprehensive logging, S3 configuration, and statistical analysis",
+    "version": "1.0.0",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "laravel",
+        "backup",
+        "spatie",
+        "notifications",
+        "s3",
+        "logging",
+        "statistics"
+    ],
+    "authors": [
+        {
+            "name": "Ravdeep Singh",
+            "email": "info@ubxty.com",
+            "homepage": "https://ubxty.com",
+            "role": "Developer"
+        },
+        {
+            "name": "UBXTY Unboxing Technology",
+            "email": "info@ubxty.com",
+            "homepage": "https://ubxty.com",
+            "role": "Organization"
+        }
+    ],
+    "require": {
+        "php": "^8.1|^8.2|^8.3",
+        "illuminate/support": "^10.0|^11.0|^12.0",
+        "illuminate/console": "^10.0|^11.0|^12.0",
+        "illuminate/filesystem": "^10.0|^11.0|^12.0",
+        "illuminate/notifications": "^10.0|^11.0|^12.0",
+        "spatie/laravel-backup": "^8.0|^9.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^8.0|^9.0",
+        "phpunit/phpunit": "^10.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ubxty\\SpatieLaravelBackupUtils\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Ubxty\\SpatieLaravelBackupUtils\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ubxty\\SpatieLaravelBackupUtils\\Providers\\LaravelBackupUtilsServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+} 

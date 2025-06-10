@@ -1,0 +1,85 @@
+# =======================================================
+# UBXTY Spatie Laravel Backup Utils - Environment Configuration
+# =======================================================
+#
+# Author: Ravdeep Singh <info@ubxty.com>
+# Organization: UBXTY Unboxing Technology <info@ubxty.com>
+# Version: 1.0.0
+# License: MIT
+#
+# Environment configuration template for UBXTY Spatie Laravel Backup Utils package.
+# Copy the variables you need to your main .env file and configure accordingly.
+#
+# =======================================================
+
+# -------------------------------------------------------
+# UBXTY Backup Utils Configuration
+# -------------------------------------------------------
+BACKUP_UTILS_AUTO_LOGGING=true
+BACKUP_UTILS_AUTO_FILESYSTEM=true
+BACKUP_UTILS_AUTO_NOTIFICATIONS=true
+
+# -------------------------------------------------------
+# Backup Logging Settings
+# -------------------------------------------------------
+BACKUP_LOG_CHANNEL=backup
+BACKUP_LOG_LEVEL=debug
+BACKUP_LOG_DAYS=60
+# BACKUP_LOG_PATH=
+
+# -------------------------------------------------------
+# S3 Backup Configuration
+# -------------------------------------------------------
+# Required S3 Backup Settings
+AWS_ACCESS_KEY_ID_BACKUP=your_access_key_here
+AWS_SECRET_ACCESS_KEY_BACKUP=your_secret_key_here
+AWS_DEFAULT_REGION_BACKUP=us-east-1
+AWS_BUCKET_BACKUP=your_bucket_name
+
+# Optional S3 Backup Settings
+# AWS_URL_BACKUP=https://your-bucket.s3.us-east-1.amazonaws.com
+# AWS_ENDPOINT_BACKUP=https://s3.us-east-1.amazonaws.com
+AWS_USE_PATH_STYLE_ENDPOINT_BACKUP=false
+
+# -------------------------------------------------------
+# Backup Archive Encryption
+# -------------------------------------------------------
+# Optional: Password for encrypting backup archives
+# BACKUP_ARCHIVE_PASSWORD=your_secure_password_here
+
+# -------------------------------------------------------
+# Backup Statistics & Analytics
+# -------------------------------------------------------
+BACKUP_STATS_DEFAULT_DAYS=30
+BACKUP_STATS_MAX_DAYS=365
+BACKUP_STATS_CACHE_DURATION=300
+
+# -------------------------------------------------------
+# Notification System
+# -------------------------------------------------------
+BACKUP_NOTIFICATIONS_AUTO_ENHANCE=true
+BACKUP_NOTIFICATIONS_ADD_LOG_CHANNEL=true
+# BACKUP_NOTIFIABLE_CLASS=
+
+# -------------------------------------------------------
+# Testing & Validation
+# -------------------------------------------------------
+BACKUP_S3_TEST_PREFIX=backup-test-
+BACKUP_CONNECTION_TIMEOUT=30
+
+# -------------------------------------------------------
+# Email Notifications (Optional)
+# -------------------------------------------------------
+# Configure these if you want email notifications
+# MAIL_FROM_ADDRESS=backup@yourdomain.com
+# MAIL_FROM_NAME="Backup System"
+
+# -------------------------------------------------------
+# Example Usage:
+# -------------------------------------------------------
+# 1. Copy this file to your project root as .env-backup-example
+# 2. Add the variables you need to your main .env file
+# 3. Run: php artisan backup:utils install
+# 4. Run: php artisan backup:utils config-s3
+# 5. Run: php artisan backup:utils stats
+# ------------------------------------------------------- 
