@@ -31,6 +31,11 @@ kramdown:
     default_lang: html
     css_class: 'highlight'
 
+# Sass/SCSS settings
+sass:
+  sass_dir: assets/css
+  style: compressed
+
 # Exclude from processing
 exclude:
   - Gemfile
@@ -85,7 +90,6 @@ navigation:
       order: 4
 
 # Build settings
-source: .
 destination: _site
 keep_files:
   - assets

@@ -27,28 +27,38 @@ jobs:
         with:
           ruby-version: '3.1'
           bundler-cache: true
+          working-directory: ./docs
       
       - name: Setup Pages
         uses: actions/configure-pages@v4
       
-      - name: Build with Jekyll
+      - name: Install dependencies
         run: |
+          cd docs
           gem install bundler
           bundle install
-          bundle exec jekyll build --verbose
+      
+      - name: Build with Jekyll
+        run: |
+          cd docs
+          bundle exec jekyll build --verbose --baseurl=/spatie-laravel-backup-utils
         env:
           JEKYLL_ENV: production
       
       - name: List build directory contents
         run: |
-          ls -la _site/
+          ls -la docs/_site/
+          echo "Checking for assets:"
+          test -d docs/_site/assets && echo "assets directory exists" || echo "assets directory not found"
+          test -f docs/_site/assets/css/style.css && echo "CSS file exists" || echo "CSS file not found"
+          test -f docs/_site/assets/js/main.js && echo "JS file exists" || echo "JS file not found"
           echo "Checking for index.html:"
-          test -f _site/index.html && echo "index.html exists" || echo "index.html not found"
+          test -f docs/_site/index.html && echo "index.html exists" || echo "index.html not found"
       
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: _site
+          path: docs/_site
 
   deploy:
     environment:
