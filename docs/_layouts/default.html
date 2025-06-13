@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }} - {{ site.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism.min.css">
+    {% seo %}
+</head>
+<body>
+    <div class="container">
+        <nav class="sidebar">
+            {% include sidebar.html %}
+        </nav>
+        
+        <main class="content">
+            <header>
+                {% include header.html %}
+            </header>
+            
+            <article>
+                {{ content }}
+            </article>
+            
+            <footer>
+                <p>© {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-php.min.js"></script>
+    <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html> 

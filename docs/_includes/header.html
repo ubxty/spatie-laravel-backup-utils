@@ -1,0 +1,26 @@
+<div class="header">
+    <div class="header-content">
+        <h1>{{ page.title }}</h1>
+        <div class="version-selector">
+            <select onchange="window.location.href=this.value">
+                <option value="/docs/v1" {% if page.url contains '/v1/' %}selected{% endif %}>v1.x</option>
+                <!-- Add more versions as they become available -->
+            </select>
+        </div>
+    </div>
+    <div class="breadcrumbs">
+        <a href="{{ '/' | relative_url }}">Home</a>
+        {% if page.url != '/' %}
+            <span class="separator">/</span>
+            {% assign path_parts = page.url | split: '/' %}
+            {% for part in path_parts %}
+                {% if part != '' and part != 'docs' %}
+                    <a href="{{ page.url | split: part | first }}{{ part }}">{{ part | replace: '-', ' ' | capitalize }}</a>
+                    {% unless forloop.last %}
+                        <span class="separator">/</span>
+                    {% endunless %}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </div>
+</div> 

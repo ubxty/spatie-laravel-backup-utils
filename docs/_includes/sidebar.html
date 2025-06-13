@@ -1,0 +1,27 @@
+<div class="sidebar-content">
+    <div class="logo">
+        <a href="{{ '/' | relative_url }}">
+            <img src="{{ '/assets/images/logo.png' | relative_url }}" alt="{{ site.title }}">
+        </a>
+    </div>
+    
+    <nav class="main-nav">
+        {% assign current_version = page.url | split: '/' | slice: 2, 1 | first %}
+        {% assign docs = site.docs | where_exp: "doc", "doc.url contains current_version" | sort: "order" %}
+        
+        {% for doc in docs %}
+            {% if doc.url contains current_version %}
+                <div class="nav-item {% if page.url == doc.url %}active{% endif %}">
+                    <a href="{{ doc.url | relative_url }}">{{ doc.title }}</a>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </nav>
+    
+    <div class="sidebar-footer">
+        <a href="https://github.com/yourusername/spatie-laravel-backup-utils" target="_blank" rel="noopener">
+            <img src="{{ '/assets/images/github.svg' | relative_url }}" alt="GitHub">
+            View on GitHub
+        </a>
+    </div>
+</div> 

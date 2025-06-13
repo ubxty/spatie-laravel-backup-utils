@@ -1,0 +1,48 @@
+title: Laravel Backup Utils
+description: A modern backup solution for Laravel applications
+baseurl: "/spatie-laravel-backup-utils"
+url: "https://yourusername.github.io"
+
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-minimal
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /:collection/:path/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "default"
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - .git
+  - .github
+
+# Plugins
+plugins:
+  - jekyll-sitemap
+  - jekyll-seo-tag
+  - jekyll-relative-links
+
+# Navigation
+nav_items:
+  - title: Introduction
+    url: /docs/v1/introduction
+  - title: Installation
+    url: /docs/v1/installation
+  - title: Configuration
+    url: /docs/v1/configuration
+  - title: Usage
+    url: /docs/v1/usage 
