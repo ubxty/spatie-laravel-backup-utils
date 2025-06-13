@@ -23,8 +23,29 @@
                 {{ content }}
             </article>
             
-            <footer>
-                <p>© {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+            <footer class="site-footer">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>Development</h3>
+                        <p>This package is developed and maintained by <a href="https://www.linkedin.com/in/ravdeep-singh-a4544abb/" target="_blank" rel="noopener">Ravdeep Singh</a> at <a href="https://ubxty.com/home" target="_blank" rel="noopener">Ubxty</a>.</p>
+                    </div>
+                    <div class="footer-section">
+                        <h3>Resources</h3>
+                        <ul>
+                            <li><a href="https://ubxty.com/home" target="_blank" rel="noopener">Ubxty Development</a></li>
+                            <li><a href="https://github.com/ubxty/spatie-laravel-backup-utils" target="_blank" rel="noopener">GitHub Repository</a></li>
+                            <li><a href="https://www.linkedin.com/in/ravdeep-singh-a4544abb/" target="_blank" rel="noopener">Developer Profile</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-section">
+                        <h3>License</h3>
+                        <p>© {{ site.time | date: '%Y' }} {{ site.title }}. All rights reserved.</p>
+                        <p>Licensed under the MIT License.</p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>Built with ❤️ by <a href="https://ubxty.com/home" target="_blank" rel="noopener">Ubxty</a></p>
+                </div>
             </footer>
         </main>
     </div>

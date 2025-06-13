@@ -7,6 +7,10 @@ order: 1
 
 Laravel Backup Utils is a powerful package that provides additional utilities and tools for working with [spatie/laravel-backup](https://github.com/spatie/laravel-backup). This package extends the functionality of the base backup package with additional features and utilities to make backup management even more powerful and flexible.
 
+## About
+
+This package is developed and maintained by [Ravdeep Singh](https://www.linkedin.com/in/ravdeep-singh-a4544abb/) at [Ubxty](https://ubxty.com/home), a leading development company specializing in Laravel applications and custom software solutions.
+
 ## Features
 
 - **Enhanced Backup Management**: Additional commands and utilities for managing your Laravel backups
@@ -54,7 +58,9 @@ $analytics = BackupUtils::getBackupAnalytics();
 
 ## Support
 
-If you find any bugs or have any questions, please open an issue on our [GitHub repository](https://github.com/yourusername/spatie-laravel-backup-utils).
+If you find any bugs or have any questions, please open an issue on our [GitHub repository](https://github.com/ubxty/spatie-laravel-backup-utils).
+
+For professional support and custom development services, please visit [Ubxty](https://ubxty.com/home).
 
 ## Contributing
 
@@ -62,11 +68,12 @@ We welcome contributions! Please see our [contributing guide](CONTRIBUTING.md) f
 
 ## Security
 
-If you discover any security related issues, please email security@spatie.be instead of using the issue tracker.
+If you discover any security related issues, please email security@ubxty.com instead of using the issue tracker.
 
 ## Credits
 
-- [Spatie](https://spatie.be)
+- [Ubxty](https://ubxty.com/home)
+- [Ravdeep Singh](https://www.linkedin.com/in/ravdeep-singh-a4544abb/)
 - [All Contributors](../../contributors)
 
 ## License
