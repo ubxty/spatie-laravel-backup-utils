@@ -1,5 +1,5 @@
-title: Laravel Backup Utils
-description: A modern backup solution for Laravel applications - Developed by UBXTY
+title: Spatie Laravel Backup Utils
+description: Enhanced Spatie Laravel Backup utilities and CLI tools - Professional backup management extensions by UBXTY
 baseurl: "/spatie-laravel-backup-utils"
 url: "https://ubxty.github.io"
 
@@ -8,7 +8,7 @@ company:
   name: UBXTY
   full_name: "UBXTY - Unboxing Technology"
   url: "https://ubxty.com"
-  tagline: "Professional Laravel Development Solutions"
+  tagline: "Professional Laravel & Spatie Package Extensions"
 
 # Build settings
 markdown: kramdown

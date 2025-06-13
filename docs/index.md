@@ -1,22 +1,22 @@
 ---
 layout: default
-title: Laravel Backup Utils Documentation
-description: A modern backup solution for Laravel applications
+title: Spatie Laravel Backup Utils Documentation
+description: Enhanced Spatie Laravel Backup utilities and CLI tools - Professional backup management extensions
 permalink: /
 ---
 
-# Welcome to Laravel Backup Utils Documentation
+# Welcome to Spatie Laravel Backup Utils Documentation
 
-Laravel Backup Utils is a powerful package that enhances the functionality of [spatie/laravel-backup](https://github.com/spatie/laravel-backup) by providing additional utilities and features for managing your Laravel application backups.
+Spatie Laravel Backup Utils is a powerful package that enhances the functionality of [spatie/laravel-backup](https://github.com/spatie/laravel-backup) by providing additional CLI utilities, monitoring tools, and advanced features for managing your Laravel application backups.
 
-## Features
+## Enhanced Spatie Backup Features
 
-- Enhanced backup notifications
-- Backup statistics and monitoring
-- Backup logs management
-- S3 configuration management
-- Customizable backup channels
-- And much more!
+- Enhanced CLI commands for Spatie Laravel Backup
+- Advanced backup statistics and monitoring tools
+- Extended Spatie backup logs management
+- S3 and multi-disk configuration utilities
+- Customizable backup notification channels
+- Professional backup analytics and reporting
 
 ## Quick Links
 
@@ -25,9 +25,9 @@ Laravel Backup Utils is a powerful package that enhances the functionality of [s
 - [Configuration]({{ '/v1/configuration/' | relative_url }})
 - [Usage]({{ '/v1/usage/' | relative_url }})
 
-## Getting Started
+## Getting Started with Spatie Backup Utils
 
-To get started with Laravel Backup Utils, you can install it via Composer:
+To get started with Spatie Laravel Backup Utils, you can install it via Composer:
 
 ```bash
 composer require ubxty/spatie-laravel-backup-utils
@@ -41,7 +41,7 @@ php artisan vendor:publish --provider="Ubxty\LaravelBackupUtils\LaravelBackupUti
 
 ## About
 
-Laravel Backup Utils is developed and maintained by [Ravdeep Singh](https://www.linkedin.com/in/ravdeep-singh-ubxty/) at [Ubxty](https://ubxty.com).
+Spatie Laravel Backup Utils is developed and maintained by [Ravdeep Singh](https://www.linkedin.com/in/ravdeep-singh-ubxty/) at [Ubxty](https://ubxty.com). This package extends the excellent [Spatie Laravel Backup](https://github.com/spatie/laravel-backup) foundation with professional-grade CLI tools and utilities.
 
 ## License
 
