@@ -1,15 +1,15 @@
 ---
 layout: default
-title: Spatie Laravel Backup Utils Documentation
-description: Enhanced Spatie Laravel Backup utilities and CLI tools - Professional backup management extensions
+title: Spatie Laravel Backup Utils by UBXTY Documentation
+description: Enhanced Spatie Laravel Backup utilities and CLI tools - Professional backup management extensions by UBXTY
 permalink: /
 ---
 
-# Welcome to Spatie Laravel Backup Utils Documentation
+# Welcome to Spatie Laravel Backup Utils by UBXTY
 
-Spatie Laravel Backup Utils is a powerful package that enhances the functionality of [spatie/laravel-backup](https://github.com/spatie/laravel-backup) by providing additional CLI utilities, monitoring tools, and advanced features for managing your Laravel application backups.
+Spatie Laravel Backup Utils by UBXTY is a powerful package that enhances the functionality of [spatie/laravel-backup](https://github.com/spatie/laravel-backup) by providing additional CLI utilities, monitoring tools, and advanced features for managing your Laravel application backups.
 
-## Enhanced Spatie Backup Features
+## Enhanced Spatie Backup Features by UBXTY
 
 - Enhanced CLI commands for Spatie Laravel Backup
 - Advanced backup statistics and monitoring tools
