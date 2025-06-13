@@ -5,47 +5,56 @@ url: "https://ubxty.github.io"
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-minimal
-
-# Collections
-collections:
-  docs:
-    output: true
-    permalink: /:collection/:path/
-
-# Defaults
-defaults:
-  - scope:
-      path: ""
-      type: "docs"
-    values:
-      layout: "default"
-  - scope:
-      path: ""
-    values:
-      layout: "default"
+permalink: pretty
+plugins:
+  - jekyll-relative-links
+  - jekyll-seo-tag
+  - jekyll-sitemap
 
 # Exclude from processing
 exclude:
   - Gemfile
   - Gemfile.lock
-  - node_modules
   - vendor
   - .git
   - .github
+  - node_modules
+  - package.json
+  - package-lock.json
+  - README.md
+  - LICENSE
+  - composer.json
+  - composer.lock
+  - phpunit.xml
+  - tests
+  - src
+  - config
 
-# Include
+# Include specific files
 include:
-  - index.md
   - _layouts
   - _includes
   - assets
+  - docs/v1
+  - docs/index.md
 
-# Plugins
-plugins:
-  - jekyll-sitemap
-  - jekyll-seo-tag
-  - jekyll-relative-links
+# Default front matter
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: "default"
+  - scope:
+      path: "docs/v1"
+    values:
+      layout: "default"
+      permalink: /docs/v1/:title/
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /docs/:path/
 
 # Navigation
 nav_items:
@@ -59,5 +68,4 @@ nav_items:
     url: /docs/v1/usage
 
 # Build settings
-permalink: pretty
 destination: _site 
