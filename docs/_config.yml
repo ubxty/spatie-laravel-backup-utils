@@ -11,6 +11,17 @@ plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
 
+# SEO settings
+author:
+  name: Ravdeep Singh
+  twitter:
+    username: ubxty
+    card: summary_large_image
+  github:
+    username: ubxty
+  linkedin:
+    username: ravdeep-singh-ubxty
+
 # Exclude from processing
 exclude:
   - Gemfile
@@ -44,11 +55,19 @@ defaults:
       path: ""
     values:
       layout: "default"
+      author: Ravdeep Singh
+      twitter:
+        username: ubxty
+        card: summary_large_image
   - scope:
       path: "docs/v1"
     values:
       layout: "default"
       permalink: /docs/v1/:title/
+      author: Ravdeep Singh
+      twitter:
+        username: ubxty
+        card: summary_large_image
 
 # Collections
 collections:
@@ -68,4 +87,7 @@ nav_items:
     url: /docs/v1/usage
 
 # Build settings
-destination: _site 
+destination: _site
+keep_files:
+  - assets
+  - .nojekyll 
