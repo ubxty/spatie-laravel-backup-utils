@@ -20,10 +20,10 @@ Laravel Backup Utils is a powerful package that enhances the functionality of [s
 
 ## Quick Links
 
-- [Introduction](/docs/v1/introduction)
-- [Installation](/docs/v1/installation)
-- [Configuration](/docs/v1/configuration)
-- [Usage](/docs/v1/usage)
+- [Introduction]({{ '/v1/introduction/' | relative_url }})
+- [Installation]({{ '/v1/installation/' | relative_url }})
+- [Configuration]({{ '/v1/configuration/' | relative_url }})
+- [Usage]({{ '/v1/usage/' | relative_url }})
 
 ## Getting Started
 

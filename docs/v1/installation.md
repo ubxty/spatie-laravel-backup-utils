@@ -1,6 +1,7 @@
 ---
 title: Installation
 order: 2
+permalink: /v1/installation/
 ---
 
 # Installation
@@ -120,10 +121,9 @@ This command will check:
 
 After installation, you might want to:
 
-1. Review the [Configuration](/docs/v1/configuration) documentation
-2. Set up [Monitoring](/docs/v1/monitoring)
-3. Configure [Notifications](/docs/v1/notifications)
-4. Learn about [Advanced Usage](/docs/v1/advanced-usage)
+1. Review the [Configuration]({{ '/v1/configuration/' | relative_url }}) documentation
+2. Learn about [Usage]({{ '/v1/usage/' | relative_url }})
+3. Explore the complete documentation for advanced features
 
 ## Troubleshooting
 

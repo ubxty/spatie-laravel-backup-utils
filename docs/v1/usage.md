@@ -1,6 +1,7 @@
 ---
 title: Usage
 order: 4
+permalink: /v1/usage/
 ---
 
 # Usage
@@ -275,6 +276,6 @@ If you encounter issues:
 
 ## Next Steps
 
-- Learn about [Advanced Usage](/docs/v1/advanced-usage)
-- Configure [Monitoring](/docs/v1/monitoring)
-- Set up [Notifications](/docs/v1/notifications) 
+- Review the [Configuration]({{ '/v1/configuration/' | relative_url }}) guide
+- Check the [Installation]({{ '/v1/installation/' | relative_url }}) documentation
+- Visit our [GitHub repository](https://github.com/ubxty/spatie-laravel-backup-utils) for more examples 

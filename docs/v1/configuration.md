@@ -1,6 +1,7 @@
 ---
 title: Configuration
 order: 3
+permalink: /v1/configuration/
 ---
 
 # Configuration
@@ -227,6 +228,6 @@ php artisan backup-utils:validate-config
 
 ## Next Steps
 
-- Learn about [Monitoring](/docs/v1/monitoring)
-- Configure [Notifications](/docs/v1/notifications)
-- Explore [Advanced Usage](/docs/v1/advanced-usage) 
+- Learn about [Usage]({{ '/v1/usage/' | relative_url }})
+- Review the [Installation]({{ '/v1/installation/' | relative_url }}) guide
+- Explore the complete documentation for more features 

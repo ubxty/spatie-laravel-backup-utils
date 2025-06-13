@@ -1,6 +1,7 @@
 ---
 title: Introduction
 order: 1
+permalink: /v1/introduction/
 ---
 
 # Introduction
