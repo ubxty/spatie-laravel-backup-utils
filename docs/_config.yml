@@ -1,7 +1,14 @@
 title: Laravel Backup Utils
-description: A modern backup solution for Laravel applications
+description: A modern backup solution for Laravel applications - Developed by UBXTY
 baseurl: "/spatie-laravel-backup-utils"
 url: "https://ubxty.github.io"
+
+# Company & Developer Information
+company:
+  name: UBXTY
+  full_name: "UBXTY - Unboxing Technology"
+  url: "https://ubxty.com"
+  tagline: "Professional Laravel Development Solutions"
 
 # Build settings
 markdown: kramdown
@@ -15,6 +22,7 @@ plugins:
 # SEO settings
 author:
   name: Ravdeep Singh
+  company: UBXTY
   twitter:
     username: ubxty
     card: summary_large_image
@@ -22,6 +30,25 @@ author:
     username: ubxty
   linkedin:
     username: ravdeep-singh-ubxty
+
+# Twitter settings
+twitter:
+  username: ubxty
+  card: summary_large_image
+
+# Facebook settings
+facebook:
+  app_id: 
+  publisher: https://facebook.com/ubxty
+  
+# Social profiles
+social:
+  name: UBXTY
+  links:
+    - https://twitter.com/ubxty
+    - https://facebook.com/ubxty
+    - https://linkedin.com/company/ubxty
+    - https://github.com/ubxty
 
 # Kramdown settings
 kramdown:
@@ -61,7 +88,8 @@ defaults:
       path: ""
     values:
       layout: "default"
-      author: Ravdeep Singh
+      author: "Ravdeep Singh - UBXTY"
+      company: "UBXTY"
       twitter:
         username: ubxty
         card: summary_large_image
@@ -71,7 +99,8 @@ defaults:
     values:
       layout: "default"
       version: "v1"
-      author: Ravdeep Singh
+      author: "Ravdeep Singh - UBXTY"
+      company: "UBXTY"
 
 # Navigation structure
 navigation:
