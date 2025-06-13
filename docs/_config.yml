@@ -34,6 +34,13 @@ exclude:
   - .git
   - .github
 
+# Include
+include:
+  - index.md
+  - _layouts
+  - _includes
+  - assets
+
 # Plugins
 plugins:
   - jekyll-sitemap
@@ -52,4 +59,5 @@ nav_items:
     url: /docs/v1/usage
 
 # Build settings
-permalink: pretty 
+permalink: pretty
+destination: _site 
